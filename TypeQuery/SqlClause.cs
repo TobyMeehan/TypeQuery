@@ -9,44 +9,34 @@ namespace TypeQuery
 {
     public class SqlClause
     {
-        private readonly string _sql;
-
-        protected List<SqlClause> Clauses = new List<SqlClause>();
+        protected List<SqlClause> Clauses { get; } = new List<SqlClause>();
         public IEnumerable<SqlClause> ChildClauses => Clauses;
 
         public SqlClause() { }
-
-        public SqlClause(string sql)
-        {
-            _sql = sql;
-        }
 
         public SqlClause(IEnumerable<SqlClause> childClauses)
         {
             Clauses = childClauses.ToList();
         }
 
+        protected virtual SqlClause Clone()
+        {
+            return new SqlClause(Clauses.Select(c => c.Clone()));
+        }
+
         public override string ToString()
         {
-            if (Clauses.Any())
-            {
-                return string.Join(" ", Clauses.Select(clause => clause.ToString()));
-            }
-
-            return _sql;
+            return string.Join(" ", Clauses.Select(clause => clause.ToString()));
         }
 
         public virtual string ToString(out ParameterDictionary parameters)
         {
             parameters = new ParameterDictionary();
 
-            if (Clauses.Any())
+            foreach (var clause in Clauses)
             {
-                foreach (var clause in Clauses)
-                {
-                    clause.ToString(out ParameterDictionary clauseParameters);
-                    parameters = parameters.Union(clauseParameters).ToParameterDictionary();
-                }
+                clause.ToString(out ParameterDictionary clauseParameters);
+                parameters = parameters.Union(clauseParameters).ToParameterDictionary();
             }
 
             return ToString();

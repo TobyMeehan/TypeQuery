@@ -56,7 +56,7 @@ namespace TypeQuery
 
                 if (value is int)
                 {
-                    Clauses.Add(new SqlClause(value.ToString()));
+                    Clauses.Add(new RawSqlClause(value.ToString()));
                 }
 
                 if (value is string)
@@ -71,7 +71,7 @@ namespace TypeQuery
             {
                 if (member.Member is PropertyInfo property)
                 {
-                    Clauses.Add(new SqlClause($"{property.GetColumnName()}.{member.Expression.Type.GetTableName()}"));
+                    Clauses.Add(new RawSqlClause($"{property.GetColumnName()}.{member.Expression.Type.GetTableName()}"));
                 }
 
                 if (member.Member is FieldInfo)
@@ -107,41 +107,41 @@ namespace TypeQuery
             switch (nodeType)
             {
                 case ExpressionType.Add:
-                    return new SqlClause("+");
+                    return new RawSqlClause("+");
                 case ExpressionType.And:
-                    return new SqlClause("&");
+                    return new RawSqlClause("&");
                 case ExpressionType.AndAlso:
-                    return new SqlClause("AND");
+                    return new RawSqlClause("AND");
                 case ExpressionType.Divide:
-                    return new SqlClause("/");
+                    return new RawSqlClause("/");
                 case ExpressionType.Equal:
-                    return new SqlClause("=");
+                    return new RawSqlClause("=");
                 case ExpressionType.ExclusiveOr:
-                    return new SqlClause("^");
+                    return new RawSqlClause("^");
                 case ExpressionType.GreaterThan:
-                    return new SqlClause(">");
+                    return new RawSqlClause(">");
                 case ExpressionType.GreaterThanOrEqual:
-                    return new SqlClause(">=");
+                    return new RawSqlClause(">=");
                 case ExpressionType.LessThan:
-                    return new SqlClause("<");
+                    return new RawSqlClause("<");
                 case ExpressionType.LessThanOrEqual:
-                    return new SqlClause("<=");
+                    return new RawSqlClause("<=");
                 case ExpressionType.Modulo:
-                    return new SqlClause("%");
+                    return new RawSqlClause("%");
                 case ExpressionType.Multiply:
-                    return new SqlClause("*");
+                    return new RawSqlClause("*");
                 case ExpressionType.Negate:
-                    return new SqlClause("-");
+                    return new RawSqlClause("-");
                 case ExpressionType.Not:
-                    return new SqlClause("NOT");
+                    return new RawSqlClause("NOT");
                 case ExpressionType.NotEqual:
-                    return new SqlClause("<>");
+                    return new RawSqlClause("<>");
                 case ExpressionType.Or:
-                    return new SqlClause("|");
+                    return new RawSqlClause("|");
                 case ExpressionType.OrElse:
-                    return new SqlClause("OR");
+                    return new RawSqlClause("OR");
                 case ExpressionType.Subtract:
-                    return new SqlClause("-");
+                    return new RawSqlClause("-");
             }
 
             throw new ArgumentOutOfRangeException(nameof(nodeType), "Unsupported node type.");
