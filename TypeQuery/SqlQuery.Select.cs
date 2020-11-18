@@ -8,7 +8,7 @@ namespace TypeQuery
 {
     public partial class SqlQuery<T> : SqlClause
     {
-        private SelectSqlStatement AddSelect()
+        private SelectSqlStatement SetSelect()
         {
             if (!(GetStatement() is SelectSqlStatement selectStatement))
             {
@@ -21,14 +21,14 @@ namespace TypeQuery
 
         private SqlQuery<T> AddSelect(IEnumerable<string> columns)
         {
-            AddSelect().AddColumns(columns);
+            SetSelect().AddColumns(columns);
 
             return this;
         }
 
         private SqlQuery<T> AddSelect<TTable>(IEnumerable<Expression<Func<TTable, object>>> columns)
         {
-            AddSelect().AddColumns(columns);
+            SetSelect().AddColumns(columns);
 
             return this;
         }
