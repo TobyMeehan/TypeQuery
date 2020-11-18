@@ -31,5 +31,17 @@ namespace TypeQuery
                 Clauses.Insert(0, value);
             }
         }
+
+        private SqlQuery<T> AddWhere(Expression expression)
+        {
+            Clauses.Add(new WhereSqlClause(expression));
+
+            return this;
+        }
+
+        public SqlQuery<T> Where(Expression expression)
+        {
+            return CloneQuery().AddWhere(expression);
+        }
     }
 }
