@@ -14,6 +14,11 @@ namespace TypeQuery
 
         public SqlClause() { }
 
+        public SqlClause(params SqlClause[] childClauses) : this(childClauses.ToList())
+        {
+
+        }
+
         public SqlClause(IEnumerable<SqlClause> childClauses)
         {
             Clauses = childClauses.ToList();
