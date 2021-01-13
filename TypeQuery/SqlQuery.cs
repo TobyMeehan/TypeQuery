@@ -43,7 +43,7 @@ namespace TypeQuery
             return this;
         }
 
-        public SqlQuery<T> Where(Expression expression)
+        public SqlQuery<T> Where(Expression<Predicate<T>> expression)
         {
             return CloneQuery().AddWhere(expression);
         }

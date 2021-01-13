@@ -53,6 +53,12 @@ namespace TypeQuery
             {
                 Clauses.AddRange(new SqlExpression(binary.Left), GetNodeClause(binary.NodeType), new SqlExpression(binary.Right));
 
+                if (binary.NodeType == ExpressionType.AndAlso || binary.NodeType == ExpressionType.OrElse)
+                {
+                    Clauses.Insert(0, new RawSqlClause("("));
+                    Clauses.Add(new RawSqlClause(")"));
+                }
+
                 return;
             }
 
