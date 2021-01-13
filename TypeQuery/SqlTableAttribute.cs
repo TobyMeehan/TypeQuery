@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TypeQuery
 {
-    [AttributeUsage(AttributeTargets.Property, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class SqlTableAttribute : Attribute
     {
         public SqlTableAttribute(string name)

@@ -46,5 +46,23 @@ namespace TypeQuery
 
             return ToString();
         }
+
+        public static SqlClause Join(IEnumerable<SqlClause> clauses, SqlClause separator)
+        {
+            SqlClause[] array = clauses.ToArray();
+
+            if (array.Length == 0) return new SqlClause();
+            if (array.Length == 1) return array[0];
+
+            SqlClause clause = array[0];
+
+            for (int i = 1; i < clauses.Count(); i++)
+            {
+                clause.Clauses.Add(separator);
+                clause.Clauses.Add(array[i]);
+            }
+
+            return clause;
+        }
     }
 }

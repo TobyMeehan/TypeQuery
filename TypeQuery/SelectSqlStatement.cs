@@ -27,12 +27,12 @@ namespace TypeQuery
 
         public void AddColumns(IEnumerable<string> columns)
         {
-            Clauses.InsertRange(Clauses.Count - 2, columns.Select(c => new RawSqlClause(c)));
+            Clauses.Insert(Clauses.Count - 1, SqlClause.Join(columns.Select(c => new RawSqlClause(c)), new RawSqlClause(",")));
         }
 
         public void AddColumns(IEnumerable<Expression> columns)
         {
-            Clauses.InsertRange(Clauses.Count - 2, columns.Select(c => new SqlExpression(c)));
+            Clauses.Insert(Clauses.Count - 1, SqlClause.Join(columns.Select(c => new SqlExpression(c)), new RawSqlClause(",")));
         }
     }
 }

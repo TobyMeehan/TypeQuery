@@ -12,14 +12,18 @@ namespace TypeQuery
 
         protected SqlQuery<T> CloneQuery()
         {
-            return base.Clone() as SqlQuery<T>;
+            var query = new SqlQuery<T>();
+
+            query.Clauses.AddRange(Clauses);
+
+            return query;
         }
 
         private void SetStatement(SqlStatement value)
         {
             if (!Clauses.Any())
             {
-                return;
+                Clauses.Add(value);
             }
 
             if (Clauses[0] is SqlStatement)

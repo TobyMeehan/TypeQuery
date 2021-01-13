@@ -38,16 +38,22 @@ namespace TypeQuery
             if (Expression is LambdaExpression lambda)
             {
                 Clauses.Add(new SqlExpression(lambda.Body));
+
+                return;
             }
 
             if (Expression is UnaryExpression unary)
             {
                 Clauses.AddRange(GetNodeClause(unary.NodeType), new SqlExpression(unary.Operand));
+
+                return;
             }
 
             if (Expression is BinaryExpression binary)
             {
                 Clauses.AddRange(new SqlExpression(binary.Left), GetNodeClause(binary.NodeType), new SqlExpression(binary.Right));
+
+                return;
             }
 
             if (Expression is ConstantExpression constant)
@@ -57,6 +63,8 @@ namespace TypeQuery
                 if (value is int)
                 {
                     Clauses.Add(new RawSqlClause(value.ToString()));
+
+                    return;
                 }
 
                 if (value is string)
@@ -65,18 +73,24 @@ namespace TypeQuery
                 }
 
                 Clauses.Add(new ParameterSqlClause(value));
+
+                return;
             }
 
             if (Expression is MemberExpression member)
             {
                 if (member.Member is PropertyInfo property)
                 {
-                    Clauses.Add(new RawSqlClause($"{property.GetColumnName()}.{member.Expression.Type.GetTableName()}"));
+                    Clauses.Add(new RawSqlClause($"{member.Expression.Type.GetTableName()}.{property.GetColumnName()}"));
+
+                    return;
                 }
 
                 if (member.Member is FieldInfo)
                 {
                     Clauses.Add(new ParameterSqlClause(GetMemberExpressionValue(member)));
+
+                    return;
                 }
 
                 throw new ArgumentOutOfRangeException(nameof(Expression), "Expression does not refer to a property or field.");
@@ -85,6 +99,8 @@ namespace TypeQuery
             if (Expression is MethodCallExpression methodCall)
             {
                 Clauses.Add(new ParameterSqlClause(GetMethodExpressionValue(methodCall)));
+
+                return;
             }
 
             throw new ArgumentOutOfRangeException(nameof(Expression), $"Unsupported expression type '{Expression.GetType().Name}'.");

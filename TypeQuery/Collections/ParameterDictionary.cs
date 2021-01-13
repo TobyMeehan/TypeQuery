@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TypeQuery.Extensions;
 
@@ -15,6 +16,14 @@ namespace TypeQuery.Collections
             foreach (var item in dictionary)
             {
                 Add(item.Key, item.Value);
+            }
+        }
+
+        public KeyValuePair<string, object> this[int index]
+        {
+            get
+            {
+                return this.ToList()[index];
             }
         }
     }
