@@ -23,7 +23,7 @@ jobs:
     - name: Fetch Release Info
       # You may pin to the exact commit or the version.
       # uses: abatilo/release-info-action@cbceb53f7939d60b0933ae3ac125c1a94ddf0149
-      uses: abatilo/release-info-action@v1.1.0
+      uses: abatilo/release-info-action@v1.3.0
       id: release
       with:
         # The user or org for this repo
