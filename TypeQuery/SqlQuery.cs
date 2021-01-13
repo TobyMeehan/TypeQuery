@@ -47,5 +47,24 @@ namespace TypeQuery
         {
             return CloneQuery().AddWhere(expression);
         }
+
+        private SqlQuery<T> AddJoin<TLeft, TRight>(string joinType, Expression<Func<TLeft, TRight, bool>> expression)
+        {
+            Clauses.Add(new JoinSqlClause(joinType, typeof(TRight), expression));
+
+            return this;
+        }
+
+        public SqlQuery<T> InnerJoin<TJoin>(Expression<Func<T, TJoin, bool>> joinOn) => CloneQuery().AddJoin("INNER", joinOn);
+        public SqlQuery<T> InnerJoin<TLeft, TRight>(Expression<Func<TLeft, TRight, bool>> joinOn) => CloneQuery().AddJoin("INNER", joinOn);
+
+        public SqlQuery<T> LeftJoin<TJoin>(Expression<Func<T, TJoin, bool>> joinOn) => CloneQuery().AddJoin("LEFT", joinOn);
+        public SqlQuery<T> LeftJoin<TLeft, TRight>(Expression<Func<TLeft, TRight, bool>> joinOn) => CloneQuery().AddJoin("LEFT", joinOn);
+
+        public SqlQuery<T> RightJoin<TJoin>(Expression<Func<T, TJoin, bool>> joinOn) => CloneQuery().AddJoin("RIGHT", joinOn);
+        public SqlQuery<T> RightJoin<TLeft, TRight>(Expression<Func<TLeft, TRight, bool>> joinOn) => CloneQuery().AddJoin("RIGHT", joinOn);
+
+        public SqlQuery<T> FullJoin<TJoin>(Expression<Func<T, TJoin, bool>> joinOn) => CloneQuery().AddJoin("FULL OUTER", joinOn);
+        public SqlQuery<T> FullJoin<TLeft, TRight>(Expression<Func<TLeft, TRight, bool>> joinOn) => CloneQuery().AddJoin("FULL OUTER", joinOn);
     }
 }
