@@ -33,6 +33,8 @@ namespace TypeQuery
             return this;
         }
 
+        public SqlQuery<T> Select() => Select("*");
+
         public SqlQuery<T> Select(params string[] columns)
         {
             return CloneQuery().AddSelect(columns);

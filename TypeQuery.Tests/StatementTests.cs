@@ -15,7 +15,7 @@ namespace TypeQuery.Tests
         public void SelectWithString()
         {
             var query = new SqlQuery<User>()
-                .Select("*");
+                .Select();
 
             string actual = query.ToString();
 
