@@ -66,5 +66,18 @@ namespace TypeQuery
 
         public SqlQuery<T> FullJoin<TJoin>(Expression<Func<T, TJoin, bool>> joinOn) => CloneQuery().AddJoin("FULL OUTER", joinOn);
         public SqlQuery<T> FullJoin<TLeft, TRight>(Expression<Func<TLeft, TRight, bool>> joinOn) => CloneQuery().AddJoin("FULL OUTER", joinOn);
+
+        private SqlQuery<T> AddOrderBy(Expression[] columns, bool descending)
+        {
+            Clauses.Add(new OrderBySqlClause(columns, descending));
+
+            return this;
+        }
+
+        public SqlQuery<T> OrderBy(params Expression<Func<T, object>>[] columns) =>
+            CloneQuery().AddOrderBy(columns, false);
+
+        public SqlQuery<T> OrderByDescending(params Expression<Func<T, object>>[] columns) =>
+            CloneQuery().AddOrderBy(columns, true);
     }
 }
