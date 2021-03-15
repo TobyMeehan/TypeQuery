@@ -10,7 +10,7 @@ namespace TypeQuery
     {
         private SqlStatement GetStatement() => Clauses.FirstOrDefault() as SqlStatement;
 
-        protected SqlQuery<T> CloneQuery()
+        protected virtual SqlQuery<T> CloneQuery()
         {
             var query = new SqlQuery<T>();
 
