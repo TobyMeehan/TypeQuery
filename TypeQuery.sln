@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeQuery", "TypeQuery\TypeQuery.csproj", "{BB8178FD-85DC-49B1-9594-23401D226CBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeQuery.Tests", "TypeQuery.Tests\TypeQuery.Tests.csproj", "{DBE59D06-FEFB-42BA-BB1F-20AB929EEB70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeQuery.Tests", "TypeQuery.Tests\TypeQuery.Tests.csproj", "{DBE59D06-FEFB-42BA-BB1F-20AB929EEB70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeQuery.Dapper", "TypeQuery.Dapper\TypeQuery.Dapper.csproj", "{AC345600-C054-4878-9819-06CE62DF3101}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DBE59D06-FEFB-42BA-BB1F-20AB929EEB70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBE59D06-FEFB-42BA-BB1F-20AB929EEB70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBE59D06-FEFB-42BA-BB1F-20AB929EEB70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC345600-C054-4878-9819-06CE62DF3101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC345600-C054-4878-9819-06CE62DF3101}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC345600-C054-4878-9819-06CE62DF3101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC345600-C054-4878-9819-06CE62DF3101}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
