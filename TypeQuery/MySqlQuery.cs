@@ -14,5 +14,12 @@ namespace TypeQuery
 
             return query;
         }
+
+        protected override SqlQuery<T> AddLimit(int limit, int offset)
+        {
+            Clauses.Add(new LimitMySqlClause(limit, offset));
+
+            return this;
+        }
     }
 }

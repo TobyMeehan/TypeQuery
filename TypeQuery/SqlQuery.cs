@@ -79,5 +79,13 @@ namespace TypeQuery
 
         public SqlQuery<T> OrderByDescending(params Expression<Func<T, object>>[] columns) =>
             CloneQuery().AddOrderBy(columns, true);
+
+        protected virtual SqlQuery<T> AddLimit(int limit, int offset)
+        {
+            throw new NotImplementedException($"Limits are not implemented in the generic {nameof(SqlQuery<T>)}. Use an engine specific type such as {nameof(MySqlQuery<T>)}.");
+        }
+
+        public SqlQuery<T> Limit(int limit, int offset = 0) =>
+            CloneQuery().AddLimit(limit, offset);
     }
 }

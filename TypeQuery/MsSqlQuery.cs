@@ -8,11 +8,18 @@ namespace TypeQuery
     {
         protected override SqlQuery<T> CloneQuery()
         {
-            var query = new MySqlQuery<T>();
+            var query = new MsSqlQuery<T>();
 
             query.Clauses.AddRange(Clauses);
 
             return query;
+        }
+
+        protected override SqlQuery<T> AddLimit(int limit, int offset)
+        {
+            Clauses.Add(new LimitMsSqlClause(limit, offset));
+
+            return this;
         }
     }
 }
